@@ -62,6 +62,7 @@ exports.openUrl = function (url, options, success, error) {
  */
 exports.openUrlInTab = function(url, options, success, error) {
    if(options == undefined) { options = {} }
+   console.log('BT: openUrlInTab', url, options);
    exec(success, error, 'BrowserTab', 'openUrl', [url, options]);
 };
 
@@ -72,6 +73,7 @@ exports.openUrlInTab = function(url, options, success, error) {
  * @param {Function} error
  */
 exports.openUrlInBrowser = function(url, success, error) {
+   console.log('BT: openUrlInBrowser', url);
    exec(success, error, 'BrowserTab', 'openUrlInBrowser', [url]);
 };
 
@@ -81,6 +83,7 @@ exports.openUrlInBrowser = function(url, success, error) {
  * @param {Function} error
  */
 exports.close = function(success, error) {
+   console.log('BT: close');
    exec(success, error, 'BrowserTab', 'close', []);
 };
 
@@ -90,5 +93,6 @@ exports.close = function(success, error) {
  * @param {Function} error
  */
 exports.isAvailable = function(success, error) {
+   console.log('BT: isAvailable');
    exec(success, error, 'BrowserTab', 'isAvailable', []);
 };
