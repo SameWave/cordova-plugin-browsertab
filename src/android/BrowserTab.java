@@ -111,7 +111,7 @@ public class BrowserTab extends CordovaPlugin {
     // cordova.getActivity().startActivity(customTabsIntent);
 
     Context context = this.cordova.getActivity().getApplicationContext();
-    context.startActivity(intent);
+    context.startActivity(customTabsIntent);
 
     Log.d(LOG_TAG, "in app browser call dispatched");
     // callbackContext.success();
