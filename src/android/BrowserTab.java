@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.provider.Browser;
 import android.support.customtabs.CustomTabsIntent;
 import android.util.Log;
+import android.app.Activity;
 
 import java.util.Iterator;
 import java.util.List;
@@ -109,13 +110,11 @@ public class BrowserTab extends CordovaPlugin {
     Intent customTabsIntent = new CustomTabsIntent.Builder().build().intent;
     customTabsIntent.setData(Uri.parse(urlStr));
     customTabsIntent.setPackage(mCustomTabsBrowser);
-    // cordova.getActivity().startActivity(customTabsIntent);
 
     Context context = this.cordova.getActivity().getApplicationContext();
-    context.startActivity(customTabsIntent);
+    context.startActivityForResult(customTabsIntent);
 
     Log.d(LOG_TAG, "in app browser call dispatched");
-    // callbackContext.success();
   }
 
   public void openExternal(JSONArray args, CallbackContext callbackContext) {
@@ -215,4 +214,19 @@ public class BrowserTab extends CordovaPlugin {
     serviceIntent.setPackage(packageName);
     return (pm.resolveService(serviceIntent, 0) != null);
   }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent intent) 
+  {
+    if(resultCode == Activity.RESULT_OK) {
+        PluginResult result = new PluginResult(PluginResult.Status.OK, intent.getData());
+        result.setKeepCallback(true);
+        callbackContext.sendPluginResult(result);
+    }
+    else {
+        PluginResult result = new PluginResult(PluginResult.Status.ERROR, "no data returned");
+        result.setKeepCallback(true);
+        callbackContext.sendPluginResult(result);
+    }
+  }  
 }
