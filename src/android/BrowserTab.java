@@ -225,12 +225,12 @@ public class BrowserTab extends CordovaPlugin {
     if(resultCode == Activity.RESULT_OK) {
         PluginResult result = new PluginResult(PluginResult.Status.OK, intent.getData());
         result.setKeepCallback(true);
-        callbackContext.sendPluginResult(result);
+        callback.sendPluginResult(result);
     }
     else {
         PluginResult result = new PluginResult(PluginResult.Status.ERROR, "no data returned");
         result.setKeepCallback(true);
-        callbackContext.sendPluginResult(result);
+        callback.sendPluginResult(result);
     }
   }  
 }
