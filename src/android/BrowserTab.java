@@ -223,7 +223,7 @@ public class BrowserTab extends CordovaPlugin {
   public void onActivityResult(int requestCode, int resultCode, Intent intent) 
   {
     if(resultCode == Activity.RESULT_OK) {
-        PluginResult result = new PluginResult(PluginResult.Status.OK, intent.getData());
+        PluginResult result = new PluginResult(PluginResult.Status.OK, intent.getData().toString());
         result.setKeepCallback(true);
         callback.sendPluginResult(result);
     }
