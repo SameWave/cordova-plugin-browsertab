@@ -48,6 +48,7 @@ public class BrowserTab extends CordovaPlugin {
   public static final int RC_OPEN_URL = 101;
 
   private static final String LOG_TAG = "BrowserTab";
+  private CallbackContext callback = null;
 
   /**
    * The service we expect to find on a web browser that indicates it supports custom tabs.
@@ -111,8 +112,11 @@ public class BrowserTab extends CordovaPlugin {
     customTabsIntent.setData(Uri.parse(urlStr));
     customTabsIntent.setPackage(mCustomTabsBrowser);
 
+    callback = callbackContext;
+    this.cordova.setActivityResultCallback(this);
+
     Context context = this.cordova.getActivity().getApplicationContext();
-    context.startActivityForResult(customTabsIntent);
+    context.startActivityForResult(this, customTabsIntent);
 
     Log.d(LOG_TAG, "in app browser call dispatched");
   }
