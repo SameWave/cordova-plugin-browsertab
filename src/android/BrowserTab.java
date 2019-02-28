@@ -148,7 +148,10 @@ public class BrowserTab extends CordovaPlugin {
       intent.putExtra(Browser.EXTRA_APPLICATION_ID, cordova.getActivity().getPackageName());
       webView.loadUrl("javascript:console.log('BT.java startActivity')");
       this.cordova.getActivity().startActivity(intent);
-      // callbackContext.success();
+
+      PluginResult result = new PluginResult(PluginResult.Status.OK, intent.getData().toString());
+      result.setKeepCallback(true);
+      callbackContext.sendPluginResult(result);
     } catch (java.lang.RuntimeException e) {
       webView.loadUrl("javascript:console.log('BT.java error catch', "  + e.toString() + ")");
       callbackContext.error("Error loading url "+urlStr+":"+ e.toString());
