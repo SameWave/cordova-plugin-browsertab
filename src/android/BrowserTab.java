@@ -115,7 +115,7 @@ public class BrowserTab extends CordovaPlugin {
     callback = callbackContext;
     
     this.cordova.setActivityResultCallback(this);
-    this.cordova.startActivityForResult(customTabsIntent, RC_OPEN_URL);
+    this.cordova.startActivityForResult(this, customTabsIntent, RC_OPEN_URL);
 
     Log.d(LOG_TAG, "in app browser call dispatched");
   }
