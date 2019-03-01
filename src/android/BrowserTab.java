@@ -81,9 +81,9 @@ public class BrowserTab extends CordovaPlugin {
   private void isAvailable(CallbackContext callbackContext) {
     String browserPackage = findCustomTabBrowser();
     Log.d(LOG_TAG, "browser package: " + browserPackage);
-    callbackContext.sendPluginResult(new PluginResult(
-        PluginResult.Status.OK,
-        browserPackage != null));
+    PluginResult result = new PluginResult(PluginResult.Status.OK, browserPackage != null);
+    result.setKeepCallback(true);    
+    callbackContext.sendPluginResult(result);
   }
 
   private void openUrl(JSONArray args, CallbackContext callbackContext) {
