@@ -115,7 +115,7 @@ public class BrowserTab extends CordovaPlugin {
     callback = callbackContext;
     
     this.cordova.setActivityResultCallback(this);
-    this.cordova.startActivityForResult(this, customTabsIntent, 1);
+    this.cordova.startActivityForResult(customTabsIntent, RC_OPEN_URL);
 
     Log.d(LOG_TAG, "in app browser call dispatched");
   }
@@ -146,14 +146,9 @@ public class BrowserTab extends CordovaPlugin {
         intent.setData(uri);
       }
       intent.putExtra(Browser.EXTRA_APPLICATION_ID, cordova.getActivity().getPackageName());
-      webView.loadUrl("javascript:console.log('BT.java startActivity')");
       this.cordova.getActivity().startActivity(intent);
-
-      PluginResult result = new PluginResult(PluginResult.Status.OK, intent.getData().toString());
-      result.setKeepCallback(true);
-      callbackContext.sendPluginResult(result);
+      callbackContext.success();
     } catch (java.lang.RuntimeException e) {
-      webView.loadUrl("javascript:console.log('BT.java error catch', "  + e.toString() + ")");
       callbackContext.error("Error loading url "+urlStr+":"+ e.toString());
     }
   }
@@ -226,9 +221,6 @@ public class BrowserTab extends CordovaPlugin {
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent intent) 
   {
-    webView.loadUrl("javascript:console.log('BT.java requestCode'," + requestCode + ")");
-    webView.loadUrl("javascript:console.log('BT.java intent'," + intent.getData().toString() + ")");
-    webView.loadUrl("javascript:console.log('BT.java resultCode'," + resultCode + ")");
     if(resultCode == Activity.RESULT_OK) {
         PluginResult result = new PluginResult(PluginResult.Status.OK, intent.getData().toString());
         result.setKeepCallback(true);
