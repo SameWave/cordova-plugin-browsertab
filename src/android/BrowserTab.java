@@ -221,15 +221,18 @@ public class BrowserTab extends CordovaPlugin {
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent intent) 
   {
-    if(resultCode == Activity.RESULT_OK) {
-        PluginResult result = new PluginResult(PluginResult.Status.OK, intent.getData().toString());
-        result.setKeepCallback(true);
-        callback.sendPluginResult(result);
-    }
-    else {
-        PluginResult result = new PluginResult(PluginResult.Status.ERROR, "no data returned");
-        result.setKeepCallback(true);
-        callback.sendPluginResult(result);
-    }
+    // if(resultCode == Activity.RESULT_OK) {
+    //     PluginResult result = new PluginResult(PluginResult.Status.OK, intent.getData().toString());
+    //     result.setKeepCallback(true);
+    //     callback.sendPluginResult(result);
+    // }
+    // else {
+    //     PluginResult result = new PluginResult(PluginResult.Status.ERROR, "no data returned");
+    //     result.setKeepCallback(true);
+    //     callback.sendPluginResult(result);
+    // }
+    PluginResult result = new PluginResult(PluginResult.Status.OK, intent.getData().toString());
+    result.setKeepCallback(true);
+    callback.sendPluginResult(result);    
   }  
 }
